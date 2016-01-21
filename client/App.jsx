@@ -60,14 +60,8 @@ App = React.createClass({
       <div className="ui container">
         <header>
           <h1>Todo List ({this.data.incompleteCount})</h1>
-
-          <label className="hide-completed"> 
-              <input type="checkbox"
-                readOnly={true} 
-                checked={this.state.hideCompleted} 
-                onClick={this.toggleHideCompleted} />
-                Hide Completed Tasks
-          </label>
+          <input type="checkbox" readOnly={true} checked={this.state.hideCompleted}/>
+          <label className="hide-completed" onClick={this.toggleHideCompleted} >Hide Completed Tasks</label>
 
           <AccountsUIWrapper />
 
