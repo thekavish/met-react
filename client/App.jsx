@@ -10,7 +10,8 @@ App = React.createClass({
       hideCompleted: false,
     }
   },
- 
+  
+  componentDidMount:function() { $(document).ready(function() { $('select').material_select(); }); },
   // Loads items from the task collection and puts them on this.data.tasks
   getMeteorData() {
     let query = {};
@@ -40,7 +41,7 @@ App = React.createClass({
   },
 
   handleSubmit(event) {
-    // event.preventDefault();
+    event.preventDefault();
 
     // Find the text field via the React ref
     var text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
@@ -60,8 +61,17 @@ App = React.createClass({
       <div className="ui container">
         <header>
           <h1>Todo List ({this.data.incompleteCount})</h1>
-          <input type="checkbox" readOnly={true} checked={this.state.hideCompleted}/>
-          <label className="hide-completed" onClick={this.toggleHideCompleted} >Hide Completed Tasks</label>
+          <input type="checkbox" className="filled-in" id="filled-in-box" readOnly={true} checked={this.state.hideCompleted}/>
+          <label for="filled-in-box" className="hide-completed" onClick={this.toggleHideCompleted} >Hide Completed Tasks</label>
+          <div className="input-field col s12">
+            <select multiple>
+              <option value="" disabled>Choose your option</option>
+              <option value="1">ReactJS</option>
+              <option value="2">Flow Router</option>
+              <option value="3">Material Theme</option>
+            </select>
+            <label>Materialize Multiple Select</label>
+          </div>
 
           <AccountsUIWrapper />
 
