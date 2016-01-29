@@ -19,6 +19,14 @@ Meteor.methods({
     taskList.update(taskId, { $set: { checked: setChecked} });
   },
 
+  addRoles(usrId, txt){
+    // console.log(usrId,'------------');
+
+    Roles.addUsersToRoles( usrId, [{"merchantOne":['read','write','execute']},{"merchantTwo":['read','execute']}] );
+
+    console.log('> Roles, added to the owner of : '+txt)
+  },
+
   setPrivate(taskId, setToPrivate) {
     const task = taskList.findOne(taskId);
  
@@ -32,7 +40,7 @@ Meteor.methods({
  
   removeTask(taskId) {
     const task = taskList.findOne(taskId);
-    if (task.private && task.owner !== Meteor.userId()) {
+    if (task.owner !== Meteor.userId()) {
       // If the task is private, make sure only the owner can delete it
       throw new Meteor.Error("not-authorized");
     }

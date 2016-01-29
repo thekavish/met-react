@@ -34,14 +34,18 @@ App = React.createClass({
 
       const currentUserId = this.data.currentUser && this.data.currentUser._id;
       const showPrivateButton = task.owner === currentUserId;
-
+      console.log(this.data.tasks);
       return <Task key={task._id} task={task} showPrivateButton={showPrivateButton} />;
     });
 
   },
 
+  sentEmail(){
+    Meteor.call('sendEmail','kavish@deligence.com','praful@deligence.com','Hello from Meteor!','<body> <h1>Welcome name</h1> <h3>Grab yout tickets to the MADHOUSE!</h3> <pre>Offers limited! Subscribe Soon</pre> </body>');
+  },
+
   handleSubmit(event) {
-    event.preventDefault();
+    //event.preventDefault();
 
     // Find the text field via the React ref
     var text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
@@ -61,14 +65,18 @@ App = React.createClass({
       <div className="ui container">
         <header>
           <h1>Todo List ({this.data.incompleteCount})</h1>
+          <button onClick={this.sentEmail}>Send</button>
           <input type="checkbox" className="filled-in" id="filled-in-box" readOnly={true} checked={this.state.hideCompleted}/>
-          <label for="filled-in-box" className="hide-completed" onClick={this.toggleHideCompleted} >Hide Completed Tasks</label>
+          <label className="hide-completed" onClick={this.toggleHideCompleted} >Hide Completed Tasks</label>
           <div className="input-field col s12">
             <select multiple>
               <option value="" disabled>Choose your option</option>
               <option value="1">ReactJS</option>
               <option value="2">Flow Router</option>
               <option value="3">Material Theme</option>
+              <option value="4">Aldeed Simple Schema</option>
+              <option value="5">ALanning Roles</option>
+              <option value="6">Ongoworks Security</option>
             </select>
             <label>Materialize Multiple Select</label>
           </div>
