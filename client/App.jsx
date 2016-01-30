@@ -34,14 +34,12 @@ App = React.createClass({
 
       const currentUserId = this.data.currentUser && this.data.currentUser._id;
       const showPrivateButton = task.owner === currentUserId;
-      console.log(this.data.tasks);
       return <Task key={task._id} task={task} showPrivateButton={showPrivateButton} />;
     });
-
   },
 
   sentEmail(){
-    Meteor.call('sendEmail','kavish@deligence.com','praful@deligence.com','Hello from Meteor!','<body> <h1>Welcome name</h1> <h3>Grab yout tickets to the MADHOUSE!</h3> <pre>Offers limited! Subscribe Soon</pre> </body>');
+    Meteor.call('sendEmail','kavish@deligence.com','praful@deligence.com','Hello from Meteor!', ReactDOM.render(<emailTemplate />, mountNode));
   },
 
   handleSubmit(event) {
